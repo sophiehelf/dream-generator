@@ -1,0 +1,26 @@
+fetch("https://swapi.co/api/people",{
+  method: 'POST',
+  headers: {'Accept': 'application/json',
+    'Content-Type': 'application/json'},
+  body: JSON.stringify({mealPal: "Bobby@apple"})
+})
+  .then(res => res.json())
+  .then(json => console.log(json))
+
+let char = document.getElementById('char')
+
+fetch("https://swapi.co/api/people")
+  .then(res => res.json())
+  .then(res => appendCharacter(res))
+
+render("loading...</h1>")
+
+function appendCharacter(data){
+  data.results.forEach((person) => render(person.name))
+}
+
+function render(name) {
+  let h1 = document.createElement('h1')
+  h1.innerHTML = name
+  char.appendChild(h1)
+}
